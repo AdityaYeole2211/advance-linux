@@ -1,0 +1,112 @@
+```bash
+# 1. Change password
+passwd
+
+# 2. Display system's date
+date
+
+# 3. Count lines in /etc/passwd
+wc -l /etc/passwd
+
+# 4. Find out who else is on the system
+who
+
+# 5. Redirect man pages output to file
+man date > mydate
+
+# 6. Create a subdirectory called mydir
+mkdir mydir
+
+# 7. Move the file mydate to mydir
+mv mydate mydir/
+
+# 8. Go to mydir and copy mydate to ourdate
+cd mydir
+cp mydate ourdate
+
+# 9. List contents of mydir
+ls
+
+# 10. Long listing on ourdate and note permissions
+ls -l ourdate
+```
+
+```bash
+# 11. Display current directory from root
+pwd
+
+# 12. Move files from mydir to HOME directory
+mv mydir/* ~/
+
+# 13. List files in HOME directory
+ls ~
+
+# 14. Display first 5 lines of mydate
+head -n 5 mydate
+
+# 15. Display last 8 lines of mydate
+tail -n 8 mydate
+
+# 16. Remove mydir directory
+rm -r mydir
+
+# 17. Redirect long listing of files to list file
+ls -l > list
+
+# 18. Create capitals1, capitals2, and capitals3 files with state capitals
+echo "Delhi\nMumbai\nKolkata\nChennai\nBangalore" > capitals1
+echo "Hyderabad\nAhmedabad\nPune\nSurat\nJaipur" > capitals2
+echo "Lucknow\nKanpur\nNagpur\nIndore\nThane" > capitals3
+cat capitals1 capitals2 capitals3 > capitals
+
+# 19. Concatenate capitals2 to end of capitals
+cat capitals2 >> capitals
+
+# 20. Redirect capitals file as input to wc -l command
+wc -l < capitals
+```
+
+# 21. Give read and write permissions to all users for the file capitals
+chmod a+rw capitals
+
+# 22. Give read permissions only to the owner of the file capitals. 
+# Open the file, make some changes and try to save it. What happens ?
+chmod u=r capitals
+# After opening the file, you can make changes, but you won't be able to save it if you're not the owner.
+
+# 23. Create an alias to concatenate the 3 files capitals1, capitals2, capitals3
+# and redirect the output to a file named capitals. Activate the alias and make it run.
+alias concat_capitals='cat capitals1 capitals2 capitals3 > capitals && echo "Concatenation completed"'
+source ~/.bashrc  # Activate alias
+concat_capitals  # Run alias
+
+# 24. Display environment variables PATH, HOME, and TERM
+echo "PATH: $PATH"
+echo "HOME: $HOME"
+echo "TERM: $TERM"
+
+# 25. Count occurrences of string "the" in mydate
+grep -o -i "the" mydate | wc -l
+
+# 26. Find line numbers with string "date" in mydate
+grep -n "date" mydate
+
+# 27. Print lines of mydate without letter "i"
+grep -v "i" mydate
+
+# 28. Create monotonic file
+echo "^a?b?b?c?x?y?z$" > monotonic
+# Search for all 4-letter words in /usr/dict/words matching the pattern
+egrep -w "^[a-z]{4}$" /usr/dict/words | egrep -w -f monotonic
+
+# 29. List 5 states and their capitals in separate files
+echo -e "State1\nState2\nState3\nState4\nState5" > mystates
+echo -e "Capital1\nCapital2\nCapital3\nCapital4\nCapital5" > mycapitals
+# Use paste command to join the files
+paste mystates mycapitals
+
+# 30. Print 1st and 3rd columns of /etc/passwd for all students
+cut -d: -f1,3 /etc/passwd
+
+# 31. Count number of people logged in and tee output to file
+who | wc -l | tee logged_in_users.txt
